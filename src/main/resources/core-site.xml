@@ -17,8 +17,13 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
-  <property>
-    <name>fs.defaultFS</name>
-    <value>hdfs://localhost/</value>
-  </property>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://localhost:8020/</value>
+    </property>
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>file:///media/data/hadoop/hdfs/tmp</value>
+        <description>A base for other temporary directories.</description>
+    </property>
 </configuration>
