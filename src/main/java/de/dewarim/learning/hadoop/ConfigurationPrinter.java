@@ -8,7 +8,8 @@ import org.apache.hadoop.util.ToolRunner;
 import java.util.Map;
 
 /**
- * 
+ * Copied from: https://github.com/tomwhite/hadoop-book
+ * Probably copyright (C) 2014 Tom White
  */
 public class ConfigurationPrinter extends Configured implements Tool {
 
