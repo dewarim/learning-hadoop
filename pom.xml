@@ -42,6 +42,14 @@
             <version>${hadoop.version}</version>
             <scope>test</scope>
         </dependency>
+        
+        <!-- for mapping http status codes: -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>4.2.1.RELEASE</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>learning-hadoop</finalName>
@@ -61,6 +69,19 @@
                 <version>2.5</version>
                 <configuration>
                     <outputDirectory>${basedir}</outputDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>de.dewarim.learning.hadoop.LogDriver</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                 </configuration>
             </plugin>
         </plugins>
