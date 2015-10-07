@@ -4,6 +4,7 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
+import org.springframework.http.HttpStatus;
 
 import java.io.IOException;
 
@@ -28,6 +29,16 @@ public class LogMapperNewApi extends Mapper<LongWritable, Text, Text, IntWritabl
 
         String hostname = fields[8].replace("\"", "");
         String file = fields[5];
+
+        int statusCode = Integer.parseInt(fields[0]);
+        try {
+            HttpStatus status = HttpStatus.valueOf(statusCode);
+            context.getCounter(status).increment(1);
+        }
+        catch (IllegalArgumentException e){
+            System.err.println("Http status code not found for: "+statusCode);
+        }
+
         context.write(new Text(hostname + file), new IntWritable(1));
     }
 
