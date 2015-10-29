@@ -7,13 +7,13 @@
     <groupId>de.dewarim.learning</groupId>
     <artifactId>hadoop</artifactId>
     <version>1.0-SNAPSHOT</version>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <hadoop.version>2.7.1</hadoop.version>
     </properties>
-    
-    
+
+
     <dependencies>
         <!-- Hadoop main client artifact -->
         <dependency>
@@ -42,7 +42,7 @@
             <version>${hadoop.version}</version>
             <scope>test</scope>
         </dependency>
-        
+
         <!-- for mapping http status codes: -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -50,7 +50,15 @@
             <version>4.2.1.RELEASE</version>
         </dependency>
 
+        <!-- to enable projects which build upon the SparkContext-->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.10</artifactId>
+            <version>1.5.1</version>
+        </dependency>
     </dependencies>
+
+
     <build>
         <finalName>learning-hadoop</finalName>
         <plugins>
@@ -62,6 +70,33 @@
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <version>2.15.2</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <phase>compile</phase>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <phase>test-compile</phase>
+                    </execution>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
